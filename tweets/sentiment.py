@@ -1,10 +1,11 @@
 import requests
+from tweets.config import mashape
 
 
 def sentiment_api_call(outside_tweet_id, outside_text):
 
     headers = {
-        "X-Mashape-Key": "sACoZbcekAmshow29CNoYg1fXEAdp1Gc4Ctjsnw7eSS6DXts2s",
+        "X-Mashape-Key": mashape,
         "Content-Type": "application/x-www-form-urlencoded",
         "Accept": "application/json"}
 
