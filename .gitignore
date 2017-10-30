@@ -1,0 +1,8 @@
+.idea/
+capstone/settings.py
+db.sqlite3
+capstone/__pycache__/
+tweets/config.py
+tweets/config.pyc
+tweets/twitter-1.17.1/
+

@@ -1,0 +1,26 @@
+{% extends 'tweets/base.html' %}
+
+
+{% block content %}
+    <h1>Success</h1>
+    <h2>Template</h2>
+    {% for i in tweets.statuses %}
+{#        <p>{{ i }}</p>#}
+        <hr>
+        <p>Created at: {{ i.created_at }}</p>
+        <p>Username: {{ i.user.screen_name }}</p>
+        <p>User's Name: {{ i.user.name }}</p>
+        <p>Text: {{ i.text }}</p>
+        <hr>
+    {% endfor %}
+{% endblock %}
+
+{% block js %}
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
+
+
+{% endblock %}
