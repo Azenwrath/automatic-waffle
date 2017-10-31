@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from tweets.tweet_search import pull_tweets, read_tweets
-from .models import Tweet
+from tweets.models import Tweet
 from datetime import datetime
 from tweets.sentiment import sentiment_api_call
 #
@@ -11,15 +11,20 @@ from tweets.sentiment import sentiment_api_call
 # from django.contrib.auth.decorators import login_required
 # # Create your views here.
 
-def index(request):
 
-    tweets = read_tweets()
+def index(request):
+    tweets = Tweet.objects.all()
+    tweets_by_day = {}
+    sentiment_to_dict(tweets, 'neg')
+    for i in tweets:
+        pass
+
+
     return render(request, 'tweets/index.html', {'tweets':tweets})
 
 
 def add_tweets(request):
     tweets = pull_tweets()
-    # print(tweets['statuses'])
     for i in tweets['statuses']:
         if not Tweet.objects.filter(tweet_id=i['id']).exists():
             tweet = Tweet()
@@ -29,8 +34,6 @@ def add_tweets(request):
             tweet.created_at = datetime.strptime(i['created_at'], '%a %b %d %H:%M:%S %z %Y')
             tweet.save()
     return redirect('/admin/')
-
-
 
 
 def analyze_tweets(request):
@@ -44,3 +47,24 @@ def analyze_tweets(request):
             i.label = new_data['label']
             i.save()
     return redirect('/admin/')
+
+def sentiment_to_dict(tweets, pos): #querySet of tweets and key
+    pos_dict = {}
+    for i in tweets:
+        date = i.created_at.day
+        pos = i.pos
+        print("Date, pos", date, pos)
+        try:
+            pos_dict[date].append(pos)
+        except KeyError:
+            pos_dict[date] = []
+            pos_dict[date].append(pos)
+    print("Dict: ", pos_dict)
+    return_dict = {}
+
+    for i in pos_dict:
+        length = len(pos_dict[i])
+        total = sum(pos_dict[i])
+        return_dict[i] = total / length
+    print("Summed_dict: ", return_dict)
+

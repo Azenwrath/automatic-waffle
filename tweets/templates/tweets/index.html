@@ -1,15 +1,19 @@
 {% extends 'tweets/base.html' %}
 
+{% block headerjs %}
+{% endblock %}
 
 {% block content %}
     <h1>Success</h1>
     <h2>Template</h2>
-    {% for i in tweets.statuses %}
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+
+    {% for i in tweets %}
 {#        <p>{{ i }}</p>#}
         <hr>
         <p>Created at: {{ i.created_at }}</p>
-        <p>Username: {{ i.user.screen_name }}</p>
-        <p>User's Name: {{ i.user.name }}</p>
+        <p>Username: {{ i.username}}</p>
+        <p>Tweet_id: {{ i.tweet_id }}</p>
         <p>Text: {{ i.text }}</p>
         <hr>
     {% endfor %}
@@ -21,6 +25,32 @@
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
 
+<script>
+function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Day', 'Positive', 'Negative'],
+          ['1',  .5,      .400],
+          ['2',  .7,      .460],
+          ['3',  .4,      .1120],
+          ['4',  .5,      .540]
+        ]);
+
+        var options = {
+          title: 'Waffle House Twitter Sentiment',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+</script>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {packages: ['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+</script>
 
 
 {% endblock %}
