@@ -3,6 +3,7 @@ from tweets.tweet_search import pull_tweets, read_tweets
 from tweets.models import Tweet
 from datetime import datetime
 from tweets.sentiment import sentiment_api_call
+
 #
 # from django.shortcuts import render, get_object_or_404, redirect
 # from .models import Post, Comment
@@ -15,12 +16,18 @@ from tweets.sentiment import sentiment_api_call
 def index(request):
     tweets = Tweet.objects.all()
     tweets_by_day = {}
-    sentiment_to_dict(tweets, 'neg')
-    for i in tweets:
-        pass
 
+    for i in range(1, 32):
+        found_day = sentiment_to_dict(i)
+        if found_day:
+            tweets_by_day[i] = found_day
 
-    return render(request, 'tweets/index.html', {'tweets':tweets})
+    data_for_table = [['Day', 'Positive', 'Negative', 'Neutral']]
+    for i in tweets_by_day:
+        data_for_table.append([i, tweets_by_day[i]['pos'], tweets_by_day[i]['neg'], tweets_by_day[i]['neutral']])
+
+    print("Data for Table ", data_for_table)
+    return render(request, 'tweets/index.html', {'tweets': tweets, 'tweets_by_day': data_for_table})
 
 
 def add_tweets(request):
@@ -48,23 +55,20 @@ def analyze_tweets(request):
             i.save()
     return redirect('/admin/')
 
-def sentiment_to_dict(tweets, pos): #querySet of tweets and key
-    pos_dict = {}
-    for i in tweets:
-        date = i.created_at.day
-        pos = i.pos
-        print("Date, pos", date, pos)
-        try:
-            pos_dict[date].append(pos)
-        except KeyError:
-            pos_dict[date] = []
-            pos_dict[date].append(pos)
-    print("Dict: ", pos_dict)
-    return_dict = {}
 
-    for i in pos_dict:
-        length = len(pos_dict[i])
-        total = sum(pos_dict[i])
-        return_dict[i] = total / length
-    print("Summed_dict: ", return_dict)
+def sentiment_to_dict(day):
+    results = Tweet.objects.filter(created_at__day=day)
+    if results:
+        total_pos, total_neg, total_neutral = 0, 0, 0
 
+        for i in results:
+            total_pos += i.pos
+            total_neg += i.neg
+            total_neutral += i.neutral
+        length = len(results)
+        total_pos /= length
+        total_neg /= length
+        total_neutral /= length
+        return {'pos': total_pos, 'neg': total_neg, 'neutral': total_neutral}
+    else:
+        return False

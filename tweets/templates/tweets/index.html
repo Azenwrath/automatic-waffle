@@ -8,15 +8,15 @@
     <h2>Template</h2>
     <div id="curve_chart" style="width: 900px; height: 500px"></div>
 
-    {% for i in tweets %}
+{#    {% for i in tweets %}#}
 {#        <p>{{ i }}</p>#}
-        <hr>
-        <p>Created at: {{ i.created_at }}</p>
-        <p>Username: {{ i.username}}</p>
-        <p>Tweet_id: {{ i.tweet_id }}</p>
-        <p>Text: {{ i.text }}</p>
-        <hr>
-    {% endfor %}
+{#        <hr>#}
+{#        <p>Created at: {{ i.created_at }}</p>#}
+{#        <p>Username: {{ i.username}}</p>#}
+{#        <p>Tweet_id: {{ i.tweet_id }}</p>#}
+{#        <p>Text: {{ i.text }}</p>#}
+{#        <hr>#}
+{#    {% endfor %}#}
 {% endblock %}
 
 {% block js %}
@@ -27,13 +27,18 @@
 
 <script>
 function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Day', 'Positive', 'Negative'],
-          ['1',  .5,      .400],
-          ['2',  .7,      .460],
-          ['3',  .4,      .1120],
-          ['4',  .5,      .540]
-        ]);
+   var tableData = [
+{#          ['Day', 'Positive', 'Negative', 'Neutral'],#}
+{#       {% for k, v in tweets_by_day.items %}#}
+{#       ['{{ k }}', {{ v.pos}}, {{ v.neg }}, {{ v.neutral }}],#}
+{#       {% endfor %}#}
+       {% for i in tweets_by_day %}
+       {{ i|safe }},
+       {% endfor %}
+   ];
+
+
+    var data = google.visualization.arrayToDataTable(tableData);
 
         var options = {
           title: 'Waffle House Twitter Sentiment',
