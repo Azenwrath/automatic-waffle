@@ -6,27 +6,27 @@ from twitter import Twitter, OAuth, TwitterHTTPError
 #
 def pull_tweets():
     pass
-#     package = {}
-#     package['APPID'] = tweets.config.keys
-#
-#     ACCESS_TOKEN = tweets.config.ACCESS_TOKEN
-#     ACCESS_SECRET = tweets.config.ACCESS_SECRET
-#     CONSUMER_KEY = tweets.config.CONSUMER_KEY
-#     CONSUMER_SECRET = tweets.config.CONSUMER_SECRET
-#
-#     oauth = OAuth(ACCESS_TOKEN, ACCESS_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
-#     # req = requests.post('http://api.openweathermap.org/data/2.5/weather?', params=package)
-#     # pyobj = req.json()
-#     # pyobj = json.loads(req.content)
-#     twitter = Twitter(auth=oauth)
-#     newtweets = twitter.search.tweets(q="#wafflehouse")
-#     tweetport = json.dumps(newtweets, indent=4)
-#
-#     with open("tweets.txt", "w") as tweetfile:
-#         for line in tweetport:
-#             tweetfile.write(line)
-#
-#     return newtweets
+    package = {}
+    package['APPID'] = tweets.config.keys
+
+    ACCESS_TOKEN = tweets.config.ACCESS_TOKEN
+    ACCESS_SECRET = tweets.config.ACCESS_SECRET
+    CONSUMER_KEY = tweets.config.CONSUMER_KEY
+    CONSUMER_SECRET = tweets.config.CONSUMER_SECRET
+
+    oauth = OAuth(ACCESS_TOKEN, ACCESS_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
+    # req = requests.post('http://api.openweathermap.org/data/2.5/weather?', params=package)
+    # pyobj = req.json()
+    # pyobj = json.loads(req.content)
+    twitter = Twitter(auth=oauth)
+    newtweets = twitter.search.tweets(q="#wafflehouse")
+    tweetport = json.dumps(newtweets, indent=4)
+
+    with open("tweets.txt", "w") as tweetfile:
+        for line in tweetport:
+            tweetfile.write(line)
+
+    return newtweets
 
 
 def read_tweets():

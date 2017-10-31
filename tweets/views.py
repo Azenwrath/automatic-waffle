@@ -18,15 +18,16 @@ def index(request):
 
 
 def add_tweets(request):
-    tweets = read_tweets()
-    print(tweets['statuses'])
+    tweets = pull_tweets()
+    # print(tweets['statuses'])
     for i in tweets['statuses']:
-        tweet = Tweet()
-        tweet.tweet_id = str(i['id'])
-        tweet.username = i['user']['screen_name']
-        tweet.text = i['text']
-        tweet.created_at = datetime.strptime(i['created_at'], '%a %b %d %H:%M:%S %z %Y')
-        tweet.save()
+        if not Tweet.objects.filter(tweet_id=i['id']).exists():
+            tweet = Tweet()
+            tweet.tweet_id = str(i['id'])
+            tweet.username = i['user']['screen_name']
+            tweet.text = i['text']
+            tweet.created_at = datetime.strptime(i['created_at'], '%a %b %d %H:%M:%S %z %Y')
+            tweet.save()
     return redirect('/admin/')
 
 
