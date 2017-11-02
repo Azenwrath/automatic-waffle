@@ -1,5 +1,4 @@
 .idea/
-capstone/settings.py
 db.sqlite3
 capstone/__pycache__/
 tweets/config.py

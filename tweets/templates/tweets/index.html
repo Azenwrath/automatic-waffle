@@ -8,15 +8,15 @@
     <h2>Template</h2>
     <div id="curve_chart" style="width: 900px; height: 500px"></div>
 
-{#    {% for i in tweets %}#}
-{#        <p>{{ i }}</p>#}
-{#        <hr>#}
-{#        <p>Created at: {{ i.created_at }}</p>#}
-{#        <p>Username: {{ i.username}}</p>#}
-{#        <p>Tweet_id: {{ i.tweet_id }}</p>#}
-{#        <p>Text: {{ i.text }}</p>#}
-{#        <hr>#}
-{#    {% endfor %}#}
+    {% for i in tweets %}
+        <p>{{ i }}</p>
+        <hr>
+        <p>Created at: {{ i.created_at }}</p>
+        <p>Username: {{ i.username}}</p>
+        <p>Tweet_id: {{ i.tweet_id }}</p>
+        <p>Text: {{ i.text }}</p>
+        <hr>
+    {% endfor %}
 {% endblock %}
 
 {% block js %}
