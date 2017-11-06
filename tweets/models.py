@@ -12,4 +12,4 @@ class Tweet(models.Model):
     label = models.CharField(max_length=10, blank=True, null=True)
 
     def __str__(self):
-        return self.text[:50]
+        return self.tweet_id

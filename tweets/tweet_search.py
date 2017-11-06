@@ -19,7 +19,7 @@ def pull_tweets():
     # pyobj = req.json()
     # pyobj = json.loads(req.content)
     twitter = Twitter(auth=oauth)
-    newtweets = twitter.search.tweets(q="#wafflehouse")
+    newtweets = twitter.search.tweets(q="#wafflehouse", count=100)
     tweetport = json.dumps(newtweets, indent=4)
 
     with open("tweets.txt", "w") as tweetfile:

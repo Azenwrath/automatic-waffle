@@ -12,7 +12,7 @@
         <p>{{ i }}</p>
         <hr>
         <p>Created at: {{ i.created_at }}</p>
-        <p>Username: {{ i.username}}</p>
+        <p>Username: {{ i.username }}</p>
         <p>Tweet_id: {{ i.tweet_id }}</p>
         <p>Text: {{ i.text }}</p>
         <hr>
@@ -20,42 +20,54 @@
 {% endblock %}
 
 {% block js %}
-<script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
 
-<script>
-function drawChart() {
-   var tableData = [
-{#          ['Day', 'Positive', 'Negative', 'Neutral'],#}
-{#       {% for k, v in tweets_by_day.items %}#}
-{#       ['{{ k }}', {{ v.pos}}, {{ v.neg }}, {{ v.neutral }}],#}
-{#       {% endfor %}#}
-       {% for i in tweets_by_day %}
-       {{ i|safe }},
-       {% endfor %}
-   ];
+    <script>
+        function drawChart() {
+            var tableHeader = [['Day', 'Positive', 'Negative', 'Neutral']];
+
+            var tableScores = [
+                {% for k, v in tweets_by_day.items %}
+                    [new Date({{ v.year }}, {{ v.month }}, {{ v.day }}), {{ v.pos}}, {{ v.neg }}, {{ v.neutral }}],
+                {% endfor %}
+                {#       {% for i in tweets_by_day %}#}
+                {#       {{ i|safe }},#}
+                {#       {% endfor %}#}
+            ];
+            tableScores.sort(function (date1, date2) {
+                if (date1[0] > date2[0]) return 1;
+                if (date1[0] < date2[0]) return -1;
+                return 0;
+            });
+            var tableData = tableHeader.concat(tableScores);
+            console.log(tableData);
+
+            var data = google.visualization.arrayToDataTable(tableData);
+
+            var options = {
+                title: 'Waffle House Twitter Sentiment',
+                curveType: 'function',
+                legend: {position: 'bottom'},
+                isStacked: true
+            };
+
+                    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+            {#        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));#}
+{#            var chart = new google.visualization.BarChart(document.getElementById('curve_chart'));#}
 
 
-    var data = google.visualization.arrayToDataTable(tableData);
-
-        var options = {
-          title: 'Waffle House Twitter Sentiment',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-        chart.draw(data, options);
-      }
-</script>
-      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-  google.charts.load('current', {packages: ['corechart']});
-  google.charts.setOnLoadCallback(drawChart);
-</script>
+            chart.draw(data, options);
+        }
+    </script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+    </script>
 
 
 {% endblock %}
