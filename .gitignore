@@ -1,8 +1,6 @@
 .idea/
 db.sqlite3
 capstone/__pycache__/
-tweets/config.py
-tweets/config.pyc
 tweets/__pycache__/
 .idea/workspace.xml
 
