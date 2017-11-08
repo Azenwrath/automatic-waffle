@@ -1,0 +1,3 @@
+# The newline at the end of this file is extremely important.  Cron won't run without it.
+*/19 * * * * curl http://aws-capstone2-dev.us-west-2.elasticbeanstalk.com/add_tweets/
+*/20 * * * * curl http://aws-capstone2-dev.us-west-2.elasticbeanstalk.com/analyze_tweets/
