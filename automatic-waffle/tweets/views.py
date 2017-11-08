@@ -21,9 +21,6 @@ def index(request):
     tweets_by_day = {}
     for i in tweets:
         tweets_by_day[i] = sentiment_to_dict(tweets[i], i[0], i[1], i[2])
-
-    print("Average Tweet Scores by month, day")
-    print(tweets_by_day)
     #
     # data_for_table = [['Day', 'Positive', 'Negative', 'Neutral']]
     # for i in tweets_by_day:
