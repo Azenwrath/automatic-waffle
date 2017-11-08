@@ -39,10 +39,12 @@ def add_tweets(request):
             tweet.text = i['text']
             tweet.created_at = datetime.strptime(i['created_at'], '%a %b %d %H:%M:%S %z %Y')
             tweet.save()
+
+    analyze_tweets()
     return redirect('/admin/')
 
 
-def analyze_tweets(request):
+def analyze_tweets():
     tweets = Tweet.objects.all()
     for i in tweets:
         if not i.pos:
@@ -52,7 +54,7 @@ def analyze_tweets(request):
             i.neutral = new_data['neutral']
             i.label = new_data['label']
             i.save()
-    return redirect('/admin/')
+    return
 
 
 def sentiment_to_dict(results, month, day, year):
