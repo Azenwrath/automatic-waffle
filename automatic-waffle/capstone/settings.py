@@ -68,7 +68,7 @@ TEMPLATES = [
         },
     },
 ]
-on
+
 WSGI_APPLICATION = 'capstone.wsgi.application'
 
 
