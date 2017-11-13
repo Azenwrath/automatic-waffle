@@ -4,16 +4,32 @@
 {% endblock %}
 
 {% block content %}
-    <p>
+<h4>From Wikipedia</h4>
 
-        From Wikipedia
+        <p>The Waffle House Index is an informal metric used by the Federal Emergency Management Agency (FEMA) to determine
+    the effect of a storm and the likely scale of assistance required for disaster recovery.<sup>[<a href="#cite_note-1">1</a>]</sup> "If you get there
+        and the Waffle House is closed? That's really bad. That's when you go to work."<sup>[<a href="#cite_note-WSJ-2">2</a>]</sup> The Waffle House Index has not
+    seen wide use outside of its value as a novel statistic.</p>
 
-        The Waffle House Index is an informal metric used by the Federal Emergency Management Agency (FEMA) to determine
-        the effect of a storm and the likely scale of assistance required for disaster recovery.[1] "If you get there
-        and the Waffle House is closed? That's really bad. That's when you go to work."[2] The Waffle House Index has not
-        seen wide use outside of its value as a novel statistic.</p>
+     <p>This project exlores novel approaches to identifying Waffle house behavior through live data mining and sentiment
+    analysis. The bot scrapes Twitter every 15 minutes for mentions for Waffle House up to the Twitter rate limit for
+    free
+    searches. Each Tweet is then run through a naive Bayes classifier trained on movie review and twitter data sets by
+    <a href="http://www.cs.cornell.edu/people/pabo/movie-review-data/"> Bo Pang and Lillian Lee of Cornell
+       University</a>. Each Tweet is rated for positivity, negativity, and neutrality. Positive and negative sentiment
+        represent positive and negative emotional affect and will always add up to one. Neutrality is indepdendt from the positive-negaitve
+        axis, and it represents the intensity of sentiment in a given text. Tweets such as "At @WaffleHouse" show high neutrality
+        scores. Values shown are the arithmetic mean by day. All sentiment analysis is done on the text of the tweet, with no
+    additional consideration given for other Tweet specific variables like number of followers, retweets, verified accounts, etc.</p>
 
+        <p>This data is not intended for emergency management use.
+    </p>
+References
+<ul>
+<li id="cite_note-1">McKenna, Maryn (6 December 2016). <a rel="nofollow" href="http://fivethirtyeight.com/features/if-waffle-house-is-closed-its-time-to-panic/?ex_cid=538twitter">"If Waffle House Is Closed, It's Time To Panic"</a>. <i>FiveThirtyEight</i>. Retrieved <span class="nowrap">14 December</span> 2016</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.jtitle=FiveThirtyEight&amp;rft.atitle=If+Waffle+House+Is+Closed%2C+It%E2%80%99s+Time+To+Panic&amp;rft.date=2016-12-06&amp;rft.aulast=McKenna&amp;rft.aufirst=Maryn&amp;rft_id=http%3A%2F%2Ffivethirtyeight.com%2Ffeatures%2Fif-waffle-house-is-closed-its-time-to-panic%2F%3Fex_cid%3D538twitter&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AWaffle+House+Index" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-WSJ-2"><a rel="nofollow" href="https://www.wsj.com/articles/SB10001424053111904716604576542460736605364">"How to Measure a Storm's Fury One Breakfast at a Time"</a>. <i>Wall Street Journal</i>. September 1, 2011.</cite></li>
 
+</ul>
 
 
     <div id="curve_chart" style="width: 900px; height: 500px"></div>
@@ -22,15 +38,15 @@
     <input type="button" id="BarChart" name="BarChart" value="Bar Chart">
 
     <hr>
-    {#    {% for i in tweets %}#}
-    {#        <p>{{ i }}</p>#}
-    {#        <hr>#}
-    {#        <p>Created at: {{ i.created_at }}</p>#}
-    {#        <p>Username: {{ i.username }}</p>#}
-    {#        <p>Tweet_id: {{ i.tweet_id }}</p>#}
-    {#        <p>Text: {{ i.text }}</p>#}
-    {#        <hr>#}
-    {#    {% endfor %}#}
+    <!--{#    {% for i in tweets %}#}-->
+    <!--{#        <p>{{ i }}</p>#}-->
+    <!--{#        <hr>#}-->
+    <!--{#        <p>Created at: {{ i.created_at }}</p>#}-->
+    <!--{#        <p>Username: {{ i.username }}</p>#}-->
+    <!--{#        <p>Tweet_id: {{ i.tweet_id }}</p>#}-->
+    <!--{#        <p>Text: {{ i.text }}</p>#}-->
+    <!--{#        <hr>#}-->
+    <!--{#    {% endfor %}#}-->
 {% endblock %}
 
 {% block js %}
