@@ -24,4 +24,4 @@ urlpatterns = [
     url(r'^$', tweet_views.index, name='index'),
     url(r'^add_tweets/$', tweet_views.add_tweets, name="add"),
     url(r'^analyze_tweets/$', tweet_views.analyze_tweets, name="add"),
-    ]
+    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
