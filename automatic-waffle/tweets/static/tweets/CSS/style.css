@@ -69,3 +69,8 @@ body {
     border-radius: 15px;
     border: solid #1e90ff 10px;
 }
+
+.footer {
+    width: 900px;
+    margin: 0 auto;
+}
