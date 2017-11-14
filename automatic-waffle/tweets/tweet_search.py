@@ -5,7 +5,7 @@ from twitter import Twitter, OAuth, TwitterHTTPError
 def pull_tweets():
 
     package = {}
-    package['APPID'] = tweets.config.keys
+    package['APPID'] = os.environ['keys']
 
     ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
     ACCESS_SECRET = os.environ['ACCESS_SECRET']
