@@ -14,3 +14,4 @@ tweets/__pycache__/
 
 
 /automatic-waffle/tweets/config.py
+/automatic-waffle/tweets/management/commands/createsu.py
