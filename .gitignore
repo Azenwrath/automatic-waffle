@@ -12,4 +12,4 @@ tweets/__pycache__/
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 
-/automatic-waffle/tweets/config.py
+
