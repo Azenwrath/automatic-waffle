@@ -23,7 +23,7 @@ def index(request):
         for i in tweets:
             tweets_by_day[i] = sentiment_to_dict(tweets[i], i[0], i[1], i[2])
     except TypeError:
-        print("Failed sentiment analysis for tweet: ", i.tweet_id)
+        print("Failed sentiment analysis for tweets on: ", i)
 
     return render(request, 'tweets/index.html', {'tweets': all_tweets, 'tweets_by_day': tweets_by_day})
 
