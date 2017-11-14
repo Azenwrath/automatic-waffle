@@ -25,10 +25,11 @@ body {
 }
 
 .introduction {
-    padding-top:
     padding: 10px;
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
     font-size: 1.2em;
+    width: 900px;
+    margin: 0 auto;
 }
 .data {
     padding: 10px;
