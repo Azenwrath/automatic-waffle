@@ -63,3 +63,9 @@ body {
     width: 900px;
     height: 500px;
 }
+
+.superlatives-title {
+    background: #1e90ff;
+    border-radius: 15px;
+    border: solid #1e90ff 10px;
+}
