@@ -1,6 +1,4 @@
-import requests
-import tweets.config
-import json
+import json, os
 from twitter import Twitter, OAuth, TwitterHTTPError
 
 #
@@ -9,10 +7,10 @@ def pull_tweets():
     package = {}
     package['APPID'] = tweets.config.keys
 
-    ACCESS_TOKEN = tweets.config.ACCESS_TOKEN
-    ACCESS_SECRET = tweets.config.ACCESS_SECRET
-    CONSUMER_KEY = tweets.config.CONSUMER_KEY
-    CONSUMER_SECRET = tweets.config.CONSUMER_SECRET
+    ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
+    ACCESS_SECRET = os.environ['ACCESS_SECRET']
+    CONSUMER_KEY = os.environ['CONSUMER_KEY']
+    CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
 
     oauth = OAuth(ACCESS_TOKEN, ACCESS_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
 
