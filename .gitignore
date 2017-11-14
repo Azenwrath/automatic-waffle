@@ -1,7 +1,7 @@
 .idea/
 db.sqlite3
-capstone/__pycache__/
-tweets/__pycache__/
+automatic-waffle/capstone/__pycache__/
+automatic-waffle/tweets/__pycache__/
 .idea/workspace.xml
 
 
