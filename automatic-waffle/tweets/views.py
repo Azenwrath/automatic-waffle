@@ -19,12 +19,11 @@ def index(request):
     all_tweets = Tweet.objects.all()
     tweets = collect_tweets_table()
     tweets_by_day = {}
-    for i in tweets:
-        tweets_by_day[i] = sentiment_to_dict(tweets[i], i[0], i[1], i[2])
-    #
-    # data_for_table = [['Day', 'Positive', 'Negative', 'Neutral']]
-    # for i in tweets_by_day:
-    #     data_for_table.append([i, tweets_by_day[i]['pos'], tweets_by_day[i]['neg'], tweets_by_day[i]['neutral']])
+    try:
+        for i in tweets:
+            tweets_by_day[i] = sentiment_to_dict(tweets[i], i[0], i[1], i[2])
+    except TypeError:
+        print("Failed sentiment analysis for tweet: ", i.tweet_id)
 
     return render(request, 'tweets/index.html', {'tweets': all_tweets, 'tweets_by_day': tweets_by_day})
 
