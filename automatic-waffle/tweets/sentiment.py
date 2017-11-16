@@ -25,6 +25,3 @@ def sentiment_api_call(outside_tweet_id, outside_text):
 
     return return_dict
 
-
-if __name__ == '__main__':
-    sentiment_api_call(100, "This waffle house is currently on fire")

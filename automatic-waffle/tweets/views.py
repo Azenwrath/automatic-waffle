@@ -28,34 +28,34 @@ def index(request):
     return render(request, 'tweets/index.html', {'tweets': all_tweets, 'tweets_by_day': tweets_by_day})
 
 
-def add_tweets(request):
-    tweets = pull_tweets()
-    for i in tweets['statuses']:
-        if not Tweet.objects.filter(tweet_id=i['id']).exists():
-            tweet = Tweet()
-            tweet.tweet_id = str(i['id'])
-            tweet.username = i['user']['screen_name']
-            tweet.text = i['text']
-            tweet.created_at = datetime.strptime(i['created_at'], '%a %b %d %H:%M:%S %z %Y')
-            tweet.save()
+# def add_tweets(request):
+#     tweets = pull_tweets()
+#     for i in tweets['statuses']:
+#         if not Tweet.objects.filter(tweet_id=i['id']).exists():
+#             tweet = Tweet()
+#             tweet.tweet_id = str(i['id'])
+#             tweet.username = i['user']['screen_name']
+#             tweet.text = i['text']
+#             tweet.created_at = datetime.strptime(i['created_at'], '%a %b %d %H:%M:%S %z %Y')
+#             tweet.save()
+#
+#     analyze_tweets()
+#     return redirect('/admin/')
 
-    analyze_tweets()
-    return redirect('/admin/')
-
-
-def analyze_tweets():
-    tweets = Tweet.objects.all()
-    for i in tweets:
-        if not i.pos:
-            new_data = sentiment_api_call(i.tweet_id, i.text)
-            i.pos = new_data['pos']
-            i.neg = new_data['neg']
-            i.neutral = new_data['neutral']
-            i.label = new_data['label']
-            i.save()
-    return
-
-
+#
+# def analyze_tweets():
+#     tweets = Tweet.objects.all()
+#     for i in tweets:
+#         if not i.pos:
+#             new_data = sentiment_api_call(i.tweet_id, i.text)
+#             i.pos = new_data['pos']
+#             i.neg = new_data['neg']
+#             i.neutral = new_data['neutral']
+#             i.label = new_data['label']
+#             i.save()
+#     return
+#
+#
 def sentiment_to_dict(results, month, day, year):
     total_pos, total_neg, total_neutral = 0, 0, 0
 

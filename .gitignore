@@ -3,6 +3,7 @@ db.sqlite3
 automatic-waffle/capstone/__pycache__/
 automatic-waffle/tweets/__pycache__/
 .idea/workspace.xml
+automatic-waffle/tweets/management/commands/__pycache__/
 
 
 
