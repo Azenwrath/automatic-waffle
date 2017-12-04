@@ -1,18 +1,5 @@
 from django.shortcuts import render, redirect
-from tweets.tweet_search import pull_tweets, read_tweets
 from tweets.models import Tweet
-from datetime import datetime
-from tweets.sentiment import sentiment_api_call
-
-
-#
-#
-# from django.shortcuts import render, get_object_or_404, redirect
-# from .models import Post, Comment
-# from django.utils import timezone
-# from .forms import PostForm, CommentForm
-# from django.contrib.auth.decorators import login_required
-# # Create your views here.
 
 
 def index(request):
@@ -28,35 +15,7 @@ def index(request):
     return render(request, 'tweets/index.html', {'tweets': all_tweets, 'tweets_by_day': tweets_by_day})
 
 
-# def add_tweets(request):
-#     tweets = pull_tweets()
-#     for i in tweets['statuses']:
-#         if not Tweet.objects.filter(tweet_id=i['id']).exists():
-#             tweet = Tweet()
-#             tweet.tweet_id = str(i['id'])
-#             tweet.username = i['user']['screen_name']
-#             tweet.text = i['text']
-#             tweet.created_at = datetime.strptime(i['created_at'], '%a %b %d %H:%M:%S %z %Y')
-#             tweet.save()
-#
-#     analyze_tweets()
-#     return redirect('/admin/')
-
-#
-# def analyze_tweets():
-#     tweets = Tweet.objects.all()
-#     for i in tweets:
-#         if not i.pos:
-#             new_data = sentiment_api_call(i.tweet_id, i.text)
-#             i.pos = new_data['pos']
-#             i.neg = new_data['neg']
-#             i.neutral = new_data['neutral']
-#             i.label = new_data['label']
-#             i.save()
-#     return
-#
-#
-def sentiment_to_dict(results, month, day, year):
+def sentiment_to_dict(results, month, day, year):  # TODO: Replace with some map and reduce
     total_pos, total_neg, total_neutral = 0, 0, 0
 
     for i in results:

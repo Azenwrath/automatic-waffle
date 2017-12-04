@@ -1,7 +1,9 @@
-<ol> <div><b class="superlatives-title">Most {{title}} Tweets</b></div><br>
+<div><b class="superlatives-title">Most {{title}} Tweets</b></div><br>
+<ol>
     {% for i in top3 %}
     <li>{{i.username}}: {{i.text}}
-        <br><b>Pos: {{i.pos|floatformat:2 }} Neg: {{i.neg|floatformat:2 }} Neutral: {{i.neutral|floatformat:2 }}</b></li>
+        <br><b>Pos: {{i.pos|floatformat:2 }} Neg: {{i.neg|floatformat:2 }} Neutral: {{i.neutral|floatformat:2 }}</b>
+    </li>
     {% endfor %}
 
 </ol>

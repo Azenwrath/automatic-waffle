@@ -1,4 +1,0 @@
-# The newline at the end of this file is extremely important.  Cron won't run without it.
-25 * * * * curl http://aws-capstone2-dev.us-west-2.elasticbeanstalk.com/add_tweets/
-27 * * * * curl http://aws-capstone2-dev.us-west-2.elasticbeanstalk.com/analyze_tweets/
-config.py

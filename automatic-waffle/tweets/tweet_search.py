@@ -1,14 +1,16 @@
-import json, os
+import os
 from twitter import Twitter, OAuth, TwitterHTTPError
 from tweets.models import Tweet
 from datetime import datetime
 from tweets.sentiment import sentiment_api_call
 
-def pull_tweets():
+# Hooks together twitter scrapping, saving new tweets to database, and analyzes tweets.
+# All functions are chained together and triggered by the addtweets manage.py command on a cron schedule.
 
-    package = {}
-    package['APPID'] = os.environ['keys']
 
+def pull_tweets():  # Scrapes Twitter for last 100 relevant tweets.
+
+    # Assorted Twitter API keys.
     ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
     ACCESS_SECRET = os.environ['ACCESS_SECRET']
     CONSUMER_KEY = os.environ['CONSUMER_KEY']
@@ -17,19 +19,17 @@ def pull_tweets():
     oauth = OAuth(ACCESS_TOKEN, ACCESS_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
 
     twitter = Twitter(auth=oauth)
-    newtweets = twitter.search.tweets(q="#wafflehouse", count=100)
-    return newtweets
+    new_tweets = twitter.search.tweets(q="#wafflehouse", count=100)  # Searches for last 100 relevant tweets
+
+    # Adds scraped tweets to the database
+    add_tweets(new_tweets)
+
+    return True
 
 
-def read_tweets():
-
-    with open("tweets.txt", 'r') as tweetfile:
-        parsed_tweets = json.load(tweetfile)
-        return parsed_tweets
-
-
-def add_tweets():
-    tweets = pull_tweets()
+def add_tweets(new_tweets):
+    # New tweets are saved to the database
+    tweets = new_tweets
     for i in tweets['statuses']:
         if not Tweet.objects.filter(tweet_id=i['id']).exists():
             tweet = Tweet()
@@ -44,10 +44,11 @@ def add_tweets():
 
 
 def analyze_tweets():
+    # Finally each tweet is analyzed through an API call to a free sentiment analysis API
     tweets = Tweet.objects.all()
     for i in tweets:
         if not i.pos:
-            new_data = sentiment_api_call(i.tweet_id, i.text)
+            new_data = sentiment_api_call(i.text)
             i.pos = new_data['pos']
             i.neg = new_data['neg']
             i.neutral = new_data['neutral']

@@ -1,28 +1,33 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="shortcut icon" href="/static/tweets/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/static/tweets/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="{%  static 'tweets/CSS/style.css' %}">
+
     {% block css %}
     {% endblock %}
+
     {% block headerjs %}
-    {%  endblock %}
+    {% endblock %}
+
     <meta charset="UTF-8">
     <title>{% block title %}Waffle House Index v. 2{% endblock %}</title>
 </head>
-<body>
-<div class="banner">
-    <h1 class="banner-text">Waffle House Index v. 2</h1>
-</div>
-{% block content %}
-{% endblock %}
 
-<div class="footer">
-Project by: <a href="mailto:Dana.stubkjaer@gmail.com">Dana Stubkjaer</a><br>
-<a href="https://github.com/Azenwrath/">Github</a><br>
-<a href="https://github.com/Azenwrath/automatic-waffle">Source</a><br>
-</div>
+<body>
+    <div class="banner">
+        <h1 class="banner-text">Waffle House Index v. 2</h1>
+    </div>
+    {% block content %}
+    {% endblock %}
+
+    <div class="footer">
+        Project by: <a href="mailto:Dana.stubkjaer@gmail.com">Dana Stubkjaer</a><br>
+        <a href="https://github.com/Azenwrath/">Github</a><br>
+        <a href="https://github.com/Azenwrath/automatic-waffle">Source</a><br>
+    </div>
 </body>
 
 {% block js %}

@@ -2,7 +2,7 @@ import requests, os
 # from tweets.config import mashape
 
 
-def sentiment_api_call(outside_tweet_id, outside_text):
+def sentiment_api_call(outside_text):
     headers = {
         "X-Mashape-Key": os.environ['mashape'],
         "Content-Type": "application/x-www-form-urlencoded",
@@ -16,7 +16,6 @@ def sentiment_api_call(outside_tweet_id, outside_text):
     response = requests.post("https://japerk-text-processing.p.mashape.com/sentiment/", data=params, headers=headers)
     response_json = response.json()
     return_dict = {
-        "tweet_id": outside_text,
         "pos": response_json['probability']['pos'],
         "neg": response_json['probability']['neg'],
         "neutral": response_json['probability']['neutral'],
@@ -24,4 +23,3 @@ def sentiment_api_call(outside_tweet_id, outside_text):
     }
 
     return return_dict
-

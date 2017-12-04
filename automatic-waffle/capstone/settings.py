@@ -9,13 +9,10 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
-
 import os
-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -38,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tweets.apps.TweetsConfig',
+    'tweets.apps.TweetsConfig',  # Primary Django Application
     ]
 
 MIDDLEWARE = [
@@ -75,7 +72,7 @@ WSGI_APPLICATION = 'capstone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-if 'RDS_DB_NAME' in os.environ:
+if 'RDS_DB_NAME' in os.environ:  # Check for AWS deployment
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -86,12 +83,12 @@ if 'RDS_DB_NAME' in os.environ:
             'PORT': os.environ['RDS_PORT'],
         }
     }
-else:
+else:  # Else use the local Postgres copy
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'capstone',
-            'USER': 'azenwrath',
+            'USER': os.environ['DATA_USER'],
             'PASSWORD': os.environ['DATA_KEY'],
             'HOST': 'localhost',
             'PORT': '',
@@ -140,15 +137,3 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", 'static')
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'tweets', 'static')]
-
-
-radius = 5
-radius = 4
-
-
-
-
-
-
-
-

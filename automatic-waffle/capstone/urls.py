@@ -16,12 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from tweets import views as tweet_views
-from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', tweet_views.index, name='index'),
-    # url(r'^add_tweets/$', tweet_views.add_tweets, name="add"),
-    # url(r'^analyze_tweets/$', tweet_views.analyze_tweets, name="add"),
-    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    url(r'^$', tweet_views.index, name='index'),  # Landing page for this single page application
+    ]
