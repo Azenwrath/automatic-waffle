@@ -40,6 +40,7 @@ References
 </section>
 
 <section class="data">
+    <h4>Waffle House Index v.2</h4>
 
     <div class="chart_box">
     <div id="curve_chart"></div> <!-- This is the primary target for the Google Visualization API -->
@@ -65,9 +66,7 @@ References
     <script
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-            crossorigin="anonymous"></script> <!-- Dependency for Google Visualization -->
-
-    <script>
+            crossorigin="anonymous">
 
         function drawChart() {
             var tableHeader = [['Day', 'Positive', 'Negative', 'Neutral']]; // Title Header for Google Vis. API
@@ -118,8 +117,8 @@ References
             }
         }
     </script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
         google.charts.load('current', {packages: ['corechart']});
         google.charts.setOnLoadCallback(drawChart);
     </script>
