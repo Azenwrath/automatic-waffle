@@ -45,7 +45,7 @@ body {
 
 }
 
-.superlatives {
+.superlatives, .data {
     padding: 10px;
     background: #ffffff;
     width: 900px;
