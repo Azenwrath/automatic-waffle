@@ -48,7 +48,7 @@ def analyze_tweets():
     tweets = Tweet.objects.all()
     for i in tweets:
         if not i.pos:
-            new_data = sentiment_api_call(i.text)
+            new_data = sentiment_api_call(i.tweet_id, i.text)
             i.pos = new_data['pos']
             i.neg = new_data['neg']
             i.neutral = new_data['neutral']
