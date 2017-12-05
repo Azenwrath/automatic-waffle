@@ -3,7 +3,7 @@ from tweets.models import Tweet
 
 
 def index(request):
-    all_tweets = Tweet.objects.all()
+    # all_tweets = Tweet.objects.all()
     tweets = collect_tweets_table()
     tweets_by_day = {}
     try:
@@ -12,7 +12,7 @@ def index(request):
     except TypeError:
         print("Failed sentiment analysis for tweets on: ", i)
 
-    return render(request, 'tweets/index.html', {'tweets': all_tweets, 'tweets_by_day': tweets_by_day})
+    return render(request, 'tweets/index.html', {'tweets_by_day': tweets_by_day})
 
 
 def sentiment_to_dict(results, month, day, year):  # TODO: Replace with some map and reduce
