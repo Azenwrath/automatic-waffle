@@ -10,7 +10,7 @@ import newrelic.agent
 import os
 
 
-newrelic.agent.initialize('../newrelic.ini')
+newrelic.agent.initialize('newrelic.ini')
 
 from django.core.wsgi import get_wsgi_application
 
