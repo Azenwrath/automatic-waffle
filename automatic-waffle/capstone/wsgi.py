@@ -19,4 +19,3 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "capstone.settings")
 
 application = get_wsgi_application()
 application = newrelic.agent.wsgi_application()(application)
-automatic-waffle/newrelic.ini
